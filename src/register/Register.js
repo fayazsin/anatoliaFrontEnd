@@ -5,6 +5,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { toast, ToastContainer } from 'react-toastify';
 import { TextField } from 'formik-material-ui';
 import { Button, LinearProgress } from '@material-ui/core';
+import service from '../service/BankService';
+
 const RegisterSchema = Yup.object().shape({
     firstName: Yup.string().required("First Name required"),
     lastName: Yup.string().required("Last Name required"),
@@ -141,29 +143,23 @@ const Register = () => {
                     role: ["user"],
                     password: "",
                     confirmPassword: "",
-
                 }}
                 validationSchema={RegisterSchema}
                 onSubmit={(values, actions) => {
-                    // service.register(values).then((res) => {
-                    //     if (res.status === 200) {
-                    //         toast.success("Register Successfully",
-                    //             { position: toast.POSITION.TOP_CENTER });
-                    //         actions.resetForm();
-                    //     } else {
-                    //         toast.error(res.data.message,
-                    //             { position: toast.POSITION.TOP_CENTER });
-
-                    //     }
-
-                    actions.setSubmitting(false);
-
-                    // });
+                    service.register(values).then((res) => {
+                        if (res.status === 200) {
+                            toast.success("Register Successfully",
+                                { position: toast.POSITION.TOP_CENTER });
+                            actions.resetForm();
+                        } else {
+                            toast.error(res.data.message,
+                                { position: toast.POSITION.TOP_CENTER });
+                        }
+                        actions.setSubmitting(false);
+                    });
                 }}
                 component={RegistrationForm}
-            >
-
-            </Formik>
+            ></Formik>
             <ToastContainer />
         </div >
     )
