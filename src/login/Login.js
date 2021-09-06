@@ -5,6 +5,9 @@ import * as Yup from 'yup';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Button, LinearProgress } from '@material-ui/core';
 import { TextField } from 'formik-material-ui';
+import { useStateValue } from "../StateProvider"
+import service from '../service/BankService'
+import { useHistory } from 'react-router';
 
 import "./Login.css"
 const Loginform = (props) => {
@@ -24,7 +27,6 @@ const Loginform = (props) => {
                                 component={TextField}
                                 name="password"
                                 type="password" />
-
                         </Col>
                         {props.isSubmitting && <LinearProgress />}
                     </Row>
@@ -36,22 +38,16 @@ const Loginform = (props) => {
                                 onClick={props.submitFrom}
                             > Submit
                             </Button>
-
                         </Col>
-
                     </Row>
-
-
-
-
-
                 </Form>
             </fieldset>
-
         </Container>
     )
 }
 const Login = () => {
+    const history = useHistory();
+    const [userInfo, dispatch] = useStateValue();
     return (
         <div>
             <Formik
@@ -65,21 +61,29 @@ const Login = () => {
                         .min(8, 'Must be at least 8 characters')
                         .required('Password Required'),
                 })}
-                onSubmit={(values, { setSubmitting }) => {
-                    // service.login(values).then((res) => {
-                    //     if (res.status === 200) {
-                    //         const userInfo = res.data;
-                    //     }
-                    // });
-                    // if (userInfo && isAdmin) {
-                    //     history.pushState("./admin")
-
-                    // } else {
-                    //     history.pushState("./user")
-
-                    // }
-                    toast.success("Login successfully", { position: toast.POSITION.TOP_CENTER })
-
+                onSubmit={(values, actions) => {
+                    service.login(values).then((res) => {
+                        if (res.status === 200) {
+                            const userInfo = res.data;
+                            localStorage.setItem("auth",
+                                JSON.stringify({ token: userInfo.jwt }));
+                            dispatch({
+                                type: "LOGIN",
+                                item: userInfo,
+                            });
+                            if (userInfo?.user?.isAdmin) {
+                                history.pushState("./admin")
+                            } else {
+                                history.pushState("./user")
+                            }
+                            toast.success("Login successfully",
+                                {
+                                    position: toast.POSITION.TOP_CENTER,
+                                });
+                            actions.resetForm();
+                        }
+                    });
+                    actions.setSubmitting(false)
                 }}
                 component={Loginform}
             >

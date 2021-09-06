@@ -7,11 +7,15 @@ import "semantic-ui-css/semantic.min.css";
 import "font-awesome/css/font-awesome.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import reportWebVitals from './reportWebVitals';
-
+import reducer, { initialState } from './Reducer'
+import StateProvider from './StateProvider'
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <React.Fragment>
+    <StateProvider reducer={reducer} initialState={initialState} >
+      <App />
+    </StateProvider>
+
+  </React.Fragment>,
   document.getElementById('root')
 );
 
