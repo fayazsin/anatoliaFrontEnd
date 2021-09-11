@@ -9,12 +9,14 @@ import "react-toastify/dist/ReactToastify.css";
 import reportWebVitals from './reportWebVitals';
 import reducer, { initialState } from './Reducer'
 import StateProvider from './StateProvider'
+import { ToastContainer } from "react-toastify";
+
 ReactDOM.render(
   <React.Fragment>
-    <StateProvider reducer={reducer} initialState={initialState} >
+    <StateProvider initialState={initialState} reducer={reducer}  >
       <App />
     </StateProvider>
-
+    <ToastContainer autoClose={2000} />
   </React.Fragment>,
   document.getElementById('root')
 );

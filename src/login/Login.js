@@ -47,7 +47,7 @@ const Loginform = (props) => {
 }
 const Login = () => {
     const history = useHistory();
-    const [userInfo, dispatch] = useStateValue();
+    const [{ userInfo }, dispatch] = useStateValue();
     return (
         <div>
             <Formik
@@ -64,6 +64,10 @@ const Login = () => {
                 onSubmit={(values, actions) => {
                     service.login(values).then((res) => {
                         if (res.status === 200) {
+                            toast.success("Login successfully",
+                                {
+                                    position: toast.POSITION.TOP_CENTER,
+                                });
                             const userInfo = res.data;
                             localStorage.setItem("auth",
                                 JSON.stringify({ token: userInfo.jwt }));
@@ -72,14 +76,11 @@ const Login = () => {
                                 item: userInfo,
                             });
                             if (userInfo?.user?.isAdmin) {
-                                history.pushState("./admin")
+                                history.push("./admin")
                             } else {
-                                history.pushState("./user")
+                                history.push("./user")
                             }
-                            toast.success("Login successfully",
-                                {
-                                    position: toast.POSITION.TOP_CENTER,
-                                });
+
                             actions.resetForm();
                         }
                     });
