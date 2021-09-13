@@ -5,6 +5,7 @@ import Footer from './footer/Footer'
 import Home from './home/Home';
 import About from './about/About'
 import Login from './login/Login';
+import User from './user/User'
 import Register from './register/Register'
 
 
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route exact path="/register">
             <Register />
+          </Route>
+          <Route exact path="/user">
+            <User />
           </Route>
         </Switch>
         <Footer />

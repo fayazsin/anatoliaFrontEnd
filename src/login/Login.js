@@ -51,7 +51,7 @@ const Login = () => {
     return (
         <div>
             <Formik
-                initialValues={{ username: '', password: '' }}
+                initialValues={{ username: "", password: "" }}
                 validationSchema={Yup.object({
                     username: Yup.string()
                         .max(15, 'Must be 15 characters or less')
@@ -63,6 +63,7 @@ const Login = () => {
                 })}
                 onSubmit={(values, actions) => {
                     service.login(values).then((res) => {
+                        localStorage.removeItem("auth");
                         if (res.status === 200) {
                             toast.success("Login successfully",
                                 {
@@ -82,9 +83,15 @@ const Login = () => {
                             }
 
                             actions.resetForm();
+                            actions.setSubmitting(false);
                         }
+                    }).catch(() => {
+                        actions.setSubmitting(false);
+                        actions.resetForm();
+                        toast.error("Login Denied", {
+                            position: toast.POSITION.TOP_CENTER,
+                        });
                     });
-                    actions.setSubmitting(false)
                 }}
                 component={Loginform}
             >
