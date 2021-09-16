@@ -1,6 +1,6 @@
 import React from 'react'
 import { Formik, Field, Form, } from 'formik';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Button, LinearProgress } from '@material-ui/core';
@@ -98,7 +98,7 @@ const Login = () => {
             >
 
             </Formik>
-            <ToastContainer />
+
 
         </div>
     )
