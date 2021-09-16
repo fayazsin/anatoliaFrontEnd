@@ -85,13 +85,14 @@ const Login = () => {
                             actions.resetForm();
                             actions.setSubmitting(false);
                         }
-                    }).catch(() => {
-                        actions.setSubmitting(false);
-                        actions.resetForm();
-                        toast.error("Login Denied", {
-                            position: toast.POSITION.TOP_CENTER,
+                    })
+                        .catch(() => {
+                            actions.setSubmitting(false);
+                            actions.resetForm();
+                            toast.error("Login Denied", {
+                                position: toast.POSITION.TOP_CENTER,
+                            });
                         });
-                    });
                 }}
                 component={Loginform}
             >
