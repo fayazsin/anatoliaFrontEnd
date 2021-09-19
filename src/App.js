@@ -13,6 +13,7 @@ import Deposit from './deposit/Deposit'
 import Withdraw from './withdraw/Withdraw';
 import AddRecipient from './transfer/AddRecipient';
 import Transfer from './transfer/Transfer'
+import UserMgmt from './admin/UserMgmt';
 
 
 function App() {
@@ -54,6 +55,9 @@ function App() {
           </Route>
           <Route exact path="/transfer">
             <Transfer />
+          </Route>
+          <Route exact path="/userMgmt">
+            <UserMgmt />
           </Route>
         </Switch>
         <Footer />
