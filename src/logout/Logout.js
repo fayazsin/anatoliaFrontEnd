@@ -1,13 +1,13 @@
-import React from 'react'
-import { Button } from '@material-ui/core'
-import { useHistory } from 'react-router-dom'
-import { useStateValue } from '../StateProvider';
-import { Container } from 'react-bootstrap'
+import React from "react";
+import { Button } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import { useStateValue } from "../StateProvider";
+import { Container } from "react-bootstrap";
 import { toast } from "react-toastify";
+import "./Logout.css";
 
 const Logout = () => {
     const history = useHistory();
-
     const [{ userInfo }, dispatch] = useStateValue();
 
     const handleYes = () => {
@@ -21,22 +21,35 @@ const Logout = () => {
         });
 
         history.push("/");
+    };
 
-
-    }
     const handleNo = () => {
         history.goBack();
-    }
+    };
+
     return (
-        <Container>
-            <fieldset>
-                <h2> Would you like to logout?</h2>
-                <Button onClick={handleYes} variant="contained" color="secondary">Yes</Button>
-                <Button onClick={handleNo} variant="contained" color="primary">No</Button>
+        <Container className="d-flex justify-content-center">
+            <fieldset className="text-center">
+                <h2>Are you really want to logout?</h2>
+                <Button
+                    onClick={handleYes}
+                    variant="contained"
+                    color="secondary"
+                    className="logout__btn"
+                >
+                    YES
+                </Button>
+                <Button
+                    onClick={handleNo}
+                    variant="contained"
+                    color="primary"
+                    className="logout__btn"
+                >
+                    NO
+                </Button>
             </fieldset>
-
         </Container>
-    )
-}
+    );
+};
 
-export default Logout
+export default Logout;

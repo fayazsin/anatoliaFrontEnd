@@ -8,6 +8,11 @@ import Login from './login/Login';
 import User from './user/User'
 import Register from './register/Register'
 import Logout from './logout/Logout';
+import Admin from './admin/Admin'
+import Deposit from './deposit/Deposit'
+import Withdraw from './withdraw/Withdraw';
+import AddRecipient from './transfer/AddRecipient';
+import Transfer from './transfer/Transfer'
 
 
 function App() {
@@ -32,8 +37,23 @@ function App() {
           <Route exact path="/user">
             <User />
           </Route>
+          <Route exact path="/admin">
+            <Admin />
+          </Route>
           <Route exact path="/logout">
             <Logout />
+          </Route>
+          <Route exact path="/deposit">
+            <Deposit />
+          </Route>
+          <Route exact path="/withdraw">
+            <Withdraw />
+          </Route>
+          <Route exact path="/recipient">
+            <AddRecipient />
+          </Route>
+          <Route exact path="/transfer">
+            <Transfer />
           </Route>
         </Switch>
         <Footer />
