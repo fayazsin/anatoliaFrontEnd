@@ -2,7 +2,7 @@ import { Formik, Field, Form, } from 'formik'
 import React from 'react'
 import * as Yup from 'yup';
 import { Container, Row, Col } from 'react-bootstrap';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { TextField } from 'formik-material-ui';
 import { Button, LinearProgress } from '@material-ui/core';
 import service from '../service/BankService';
@@ -160,9 +160,7 @@ const Register = () => {
                 }}
                 component={RegistrationForm}
             ></Formik>
-            <ToastContainer />
         </div >
     )
 }
-
 export default Register
