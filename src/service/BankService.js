@@ -1,5 +1,5 @@
 import axiosInstance from "./axiosinstance";
-const BASE_URL = "https://bankofanatoliaf.herokuapp.com/";
+const BASE_URL = "https://bankofanatolia.herokuapp.com";
 
 class BankService {
     login(userInfo) {

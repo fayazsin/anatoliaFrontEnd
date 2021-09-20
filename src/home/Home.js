@@ -1,20 +1,20 @@
-import React from 'react'
-import Banner from '../banner/Banner'
-import Product from '../product/Product'
-import Price from '../price/Price'
-
-
-
+import React from "react";
+import Banner from "../banner/Banner";
+import About from "../about/About";
+import Price from "../price/Price";
+import "./Home.css";
 const Home = () => {
     return (
-        <div>
-            <Banner />
-            <Product />
-            <Price />
+        <div className="home-container">
+            <div id="top">
+                <Banner />
+            </div>
 
-
+            <div id="about">
+                <About />
+            </div>
         </div>
-    )
-}
+    );
+};
 
 export default Home;
